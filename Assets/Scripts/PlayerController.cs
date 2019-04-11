@@ -11,12 +11,13 @@ public class PlayerController : MonoBehaviour
     public Text countText;
     public Text winText;
     public Text livesText;
-    public int lives;
+    public int livesTotal;
     public Text timerText;
     public float timeLeft;
     public int sceneIndex;
 
     private Rigidbody rb;
+    private int lives;
     private int count;
     private float timer;
     private const int PICKUPS = 12;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
       Time.timeScale = 1;
         rb = GetComponent<Rigidbody>();
         count = 0;
+        lives = livesTotal;
         SetCountText();
         SetLivesText();
         winText.text = "";
@@ -78,7 +80,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update(){
-      float t = timer - Time.time;
+      float t = timer - Time.timeSinceLevelLoad;
       timerText.text = "Time: " + t;
       if(t<=0){
         winText.text = "You Lose!";
